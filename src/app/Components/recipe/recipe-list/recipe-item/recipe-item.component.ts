@@ -1,4 +1,5 @@
-import {Component, Input, OnInit} from '@angular/core';
+/* tslint:disable:no-trailing-whitespace */
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Recipe} from '../../recipe.model';
 
 @Component({
@@ -9,10 +10,15 @@ import {Recipe} from '../../recipe.model';
 export class RecipeItemComponent implements OnInit {
 
   @Input() recipe: Recipe;
+  @Output() recipeEventEmitter =  new EventEmitter<void>();
 
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  onItemClick() {
+    this.recipeEventEmitter.emit();
   }
 
 }
