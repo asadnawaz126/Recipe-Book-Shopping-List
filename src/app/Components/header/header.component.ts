@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+/* tslint:disable:no-trailing-whitespace */
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'app-header',
@@ -7,11 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
+  @Output() selectedLinkEmitter =  new EventEmitter<string>();
+
   collapsed = true;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
   }
 
+  onSelect(link: string) {
+    this.selectedLinkEmitter.emit(link);
+  }
+
 }
+
