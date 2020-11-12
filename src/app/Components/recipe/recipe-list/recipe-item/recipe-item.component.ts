@@ -1,6 +1,7 @@
 /* tslint:disable:no-trailing-whitespace */
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Recipe} from '../../recipe.model';
+import {RecipeService} from '../../../../services/recipe.service';
 
 @Component({
   selector: 'app-recipe-item',
@@ -10,15 +11,15 @@ import {Recipe} from '../../recipe.model';
 export class RecipeItemComponent implements OnInit {
 
   @Input() recipe: Recipe;
-  @Output() recipeEventEmitter =  new EventEmitter<void>();
 
-  constructor() { }
+  constructor(private recipeService: RecipeService) { }
 
   ngOnInit(): void {
   }
 
   onItemClick() {
-    this.recipeEventEmitter.emit();
+    this.recipeService.recipeSelected.emit(this.recipe);  // uses the passed
+                                                          // in recipe when emitting
   }
 
 }

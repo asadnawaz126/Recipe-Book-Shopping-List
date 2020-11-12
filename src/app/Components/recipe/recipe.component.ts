@@ -12,9 +12,20 @@ export class RecipeComponent implements OnInit {
 
   selectedRecipe: Recipe;
 
-  constructor() { }
+  constructor(private recipeService: RecipeService) {
+
+  }
 
   ngOnInit(): void {
+    // subscribes to the event emitter that is recipeSelected.
+    // so when onItemClick() is called in recipe-item component,
+    // this will set selected Recipe to be the recipe that is
+    // emitted from that event.
+    this.recipeService.recipeSelected.subscribe(
+      (recipe: Recipe) => {
+        this.selectedRecipe = recipe;
+      }
+    );
   }
 
 }
