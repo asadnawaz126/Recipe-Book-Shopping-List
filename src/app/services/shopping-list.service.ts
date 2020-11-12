@@ -5,7 +5,8 @@ import {Ingredient} from '../shared/ingredient.model';
   providedIn: 'root'
 })
 export class ShoppingListService {
-  ingredientAddedEmitter =  new EventEmitter<Ingredient[]>();
+  ingredientEmitter =  new EventEmitter<Ingredient[]>();
+
 
   private ingredients: Ingredient[] = [
     new Ingredient('Apple', '5'),
@@ -14,12 +15,18 @@ export class ShoppingListService {
 
   onIngredientAdded(ingredient: Ingredient) {
     this.ingredients.push(ingredient);
-    this.ingredientAddedEmitter.emit(this.ingredients.slice());
+    this.ingredientEmitter.emit(this.ingredients.slice());
   }
 
 
   getIngredients(){
     return this.ingredients.slice();
+  }
+
+  addToShoppingList(ingredients: Ingredient[]) {
+    this.ingredients.push(...ingredients); // spread operator converts an array of objects into a list of single objects
+    this.ingredientEmitter.emit(this.ingredients);
+
   }
 
   constructor() { }
